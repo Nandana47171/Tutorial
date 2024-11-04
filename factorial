@@ -1,0 +1,51 @@
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.*;
+
+
+public class FactorialApplet extends Applet implements ActionListener {
+    TextField inputField;
+    Label resultLabel;
+    Button computeButton;
+
+    public void init() {
+        
+        Label instructionLabel = new Label("Enter a number:");
+        inputField = new TextField(10);
+        computeButton = new Button("Compute Factorial");
+        resultLabel = new Label("Factorial: ");
+
+        
+        add(instructionLabel);
+        add(inputField);
+        add(computeButton);
+        add(resultLabel);
+
+       
+        computeButton.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        try {
+          
+            int number = Integer.parseInt(inputField.getText());
+           
+            long factorial = computeFactorial(number);
+            
+            resultLabel.setText("Factorial: " + factorial);
+        } catch (NumberFormatException ex) {
+            resultLabel.setText("Please enter a valid integer.");
+        }
+    }
+
+    private long computeFactorial(int number) {
+        if (number < 0) {
+            return -1; 
+        }
+        long result = 1;
+        for (int i = 1; i <= number; i++) {
+            result *= i;
+        }
+        return result;
+    }
+}
